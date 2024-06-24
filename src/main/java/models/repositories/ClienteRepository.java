@@ -50,4 +50,10 @@ public class ClienteRepository implements BasicCrud {
         return clientes;
     }
 
+    public ClienteEntity findByName(String name) {
+        ClienteEntity cliente = dao.openConnection().findByName(name);
+        dao.closeConnection();
+        return cliente;
+    }
+
 }

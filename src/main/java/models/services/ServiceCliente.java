@@ -52,4 +52,9 @@ public class ServiceCliente {
     public ClienteEntity findById(Long id){
         return repository.findById(id);
     }
+
+    public ClienteEntity findByName(String nome){
+        return repository.findByName(nome);
+    }
+
 }

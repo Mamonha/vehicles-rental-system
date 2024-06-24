@@ -50,4 +50,5 @@ public class LocacaoRepository implements BasicCrud{
         dao.closeConnection();
         return locacoes;
     }
+    
 }

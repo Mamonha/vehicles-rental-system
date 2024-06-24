@@ -29,6 +29,10 @@ public class LocadoraController {
         return service.findById(id);
     }
 
+    public LocadoraEntity findByName(String name){
+        return service.findByName(name);
+    }
+
     public void update(LocadoraEntity locadora){
         service.update(locadora);
     }

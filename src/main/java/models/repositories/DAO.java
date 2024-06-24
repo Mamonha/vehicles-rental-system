@@ -5,6 +5,8 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
 import java.util.List;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
 
 public class DAO <E>{
     private static EntityManagerFactory emf;
@@ -44,6 +46,16 @@ public class DAO <E>{
 
     public E findById(Object id) {
         return em.find(classe, id);
+    }
+
+    public E findByName(String name) {
+        // Cria a consulta JPQL com um parâmetro nomeado ":name"
+        String jpql = "SELECT e FROM " + classe.getSimpleName() + " e WHERE e.nome = :nome";
+        TypedQuery<E> query = em.createQuery(jpql, classe);
+        query.setParameter("nome", name);
+
+        // Executa a consulta e retorna a lista de resultados
+        return query.getSingleResult();
     }
 
     public List<E> findAll() {

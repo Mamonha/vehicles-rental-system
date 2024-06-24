@@ -54,4 +54,10 @@ public class LocadoraRepository implements BasicCrud {
         return !findAll().isEmpty();
     }
 
+    public LocadoraEntity findByName(String name) {
+        LocadoraEntity locadora = dao.openConnection().findByName(name);
+        dao.closeConnection();
+        return locadora;
+    }
+
 }

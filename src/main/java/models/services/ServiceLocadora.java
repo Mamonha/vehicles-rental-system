@@ -25,24 +25,24 @@ public class ServiceLocadora {
         return null;
     }
 
-    public void update(LocadoraEntity locadora){
-        if(locadora != null){
+    public void update(LocadoraEntity locadora) {
+        if (locadora != null) {
             repository.update(locadora);
-            System.out.println("Dados da locadora " + locadora.getNome()+ " atualizados com sucesso!");
+            System.out.println("Dados da locadora " + locadora.getNome() + " atualizados com sucesso!");
         }
     }
 
-    public void delete(Object entity){
+    public void delete(Object entity) {
 
-        if(entity != null){
+        if (entity != null) {
             List<LocadoraEntity> allLocadoras = repository.findAll();
             int quantidadeDeLocadoras = allLocadoras.size();
             if (quantidadeDeLocadoras > 1) {
                 repository.delete(entity);
                 LocadoraEntity locadora = (LocadoraEntity) entity;
-                System.out.println("Locadora " + locadora.getNome()+ " removido com sucesso");
+                System.out.println("Locadora " + locadora.getNome() + " removido com sucesso");
 
-            }else {
+            } else {
                 System.out.println("Não é possível deletar todas as locadoras. Pelo menos uma deve permanecer registrada no sistema.");
             }
         }
@@ -52,8 +52,11 @@ public class ServiceLocadora {
         return repository.findAll();
     }
 
-    public LocadoraEntity findById(Long id){
+    public LocadoraEntity findById(Long id) {
         return repository.findById(id);
     }
 
+    public LocadoraEntity findByName(String name) {
+        return repository.findByName(name);
+    }
 }

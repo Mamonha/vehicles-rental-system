@@ -33,4 +33,7 @@ public class ClienteController {
         service.update(cliente);
     }
 
+    public ClienteEntity findByName(String nome){
+        return service.findByName(nome);
+    }
 }
