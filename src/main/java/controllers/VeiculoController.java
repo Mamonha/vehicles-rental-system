@@ -42,4 +42,7 @@ public class VeiculoController {
         service.changeStatus(entity);
     }
 
+    public VeiculoEntity findByModelo(String modelo){
+        return service.findByModelo(modelo);
+    }
 }

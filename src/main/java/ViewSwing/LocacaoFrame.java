@@ -4,17 +4,52 @@
  */
 package ViewSwing;
 
+import Helpers.DateHelper;
+import Helpers.HandleDates;
+import ViewSwing.modal.ModalEncerrarLocacao;
+import ViewSwing.modal.ModalLocarVeiculo;
+import controllers.ClienteController;
+import controllers.LocacaoController;
+import controllers.VeiculoController;
+import models.entities.ClienteEntity;
+import models.entities.LocacaoEntity;
+import models.entities.VeiculoEntity;
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import javax.xml.crypto.Data;
+import java.time.LocalDate;
+import java.util.List;
+
 /**
  *
  * @author Mamonha
  */
 public class LocacaoFrame extends javax.swing.JFrame {
 
+    protected ClienteController clienteController = new ClienteController();
+    protected VeiculoController veiculoController = new VeiculoController();
+    protected LocacaoController locacaoController = new LocacaoController();
     /**
      * Creates new form LocacaoFrame
      */
     public LocacaoFrame() {
         initComponents();
+
+        List<ClienteEntity> clientes = clienteController.index();
+        List<VeiculoEntity> veiculos = veiculoController.index();
+        LocacaoCliente.removeAllItems();
+        VeiculoLocacaoSelect.removeAllItems();
+        if(!clientes.isEmpty()){
+            for(ClienteEntity cliente: clientes){
+                LocacaoCliente.addItem(cliente.getNome());
+            }
+        }
+        if(!veiculos.isEmpty()){
+            for(VeiculoEntity veiculo: veiculos){
+                VeiculoLocacaoSelect.addItem(veiculo.getModelo());
+            }
+        }
     }
 
     /**
@@ -26,21 +61,508 @@ public class LocacaoFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel3 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        EncerrarLocacaoButton = new javax.swing.JButton();
+        RealizarLocaçãoButton = new javax.swing.JButton();
+        VisualizarLocacaoButton = new javax.swing.JButton();
+        VoltarLocação = new javax.swing.JButton();
+        CardPanel = new javax.swing.JPanel();
+        RealizarLocacao = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        VoltarLocacaoBtn = new javax.swing.JButton();
+        LocarButton = new javax.swing.JButton();
+        LocacaoCliente = new javax.swing.JComboBox<>();
+        VeiculoLocacaoSelect = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
+        DataFim = new com.github.lgooddatepicker.components.DateTimePicker();
+        DataInicio = new com.github.lgooddatepicker.components.DateTimePicker();
+        EncerrarLocacao = new javax.swing.JPanel();
+        ListaClientesEncerrar = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        Teste = new javax.swing.JScrollPane();
+        ListarLocacoesEncerrar = new javax.swing.JTable();
+        EncerrarBtn = new javax.swing.JButton();
+        ListaLocacoesPanel = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        TabelaGerenciarClientes = new javax.swing.JTable();
+        jLabel9 = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+        jPanel3.setBackground(new java.awt.Color(48, 191, 88));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/image 1.png"))); // NOI18N
+
+        EncerrarLocacaoButton.setText("Encerrar Locação");
+        EncerrarLocacaoButton.setBackground(new java.awt.Color(125, 223, 32));
+        EncerrarLocacaoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EncerrarLocacaoButtonActionPerformed(evt);
+            }
+        });
+
+        RealizarLocaçãoButton.setText("Realizar Locação");
+        RealizarLocaçãoButton.setBackground(new java.awt.Color(125, 223, 32));
+        RealizarLocaçãoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RealizarLocaçãoButtonActionPerformed(evt);
+            }
+        });
+
+        VisualizarLocacaoButton.setText("Visualizar Locações");
+        VisualizarLocacaoButton.setBackground(new java.awt.Color(125, 223, 32));
+        VisualizarLocacaoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VisualizarLocacaoButtonActionPerformed(evt);
+            }
+        });
+
+        VoltarLocação.setText("Voltar");
+        VoltarLocação.setBackground(new java.awt.Color(125, 223, 32));
+        VoltarLocação.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VoltarLocaçãoActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addComponent(jLabel1)
+                .addContainerGap(54, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(VoltarLocação, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(RealizarLocaçãoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(VisualizarLocacaoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(EncerrarLocacaoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(68, 68, 68))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addComponent(jLabel1)
+                .addGap(78, 78, 78)
+                .addComponent(RealizarLocaçãoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(44, 44, 44)
+                .addComponent(EncerrarLocacaoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(48, 48, 48)
+                .addComponent(VisualizarLocacaoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 266, Short.MAX_VALUE)
+                .addComponent(VoltarLocação, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30))
         );
+
+        getContentPane().add(jPanel3, java.awt.BorderLayout.LINE_START);
+
+        CardPanel.setLayout(new java.awt.CardLayout());
+
+        RealizarLocacao.setBackground(new java.awt.Color(5, 102, 44));
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel2.setText("Realizar Locação");
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
+        jLabel3.setText("Data Início");
+
+        jLabel4.setText("Data Fim");
+
+        jLabel5.setText("Cliente");
+
+        VoltarLocacaoBtn.setText("Voltar");
+        VoltarLocacaoBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VoltarLocacaoBtnActionPerformed(evt);
+            }
+        });
+
+        LocarButton.setText("Locar");
+        LocarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LocarButtonActionPerformed(evt);
+            }
+        });
+
+        LocacaoCliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        LocacaoCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+//                LocacaoClienteActionPerformed(evt);
+            }
+        });
+
+        VeiculoLocacaoSelect.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        VeiculoLocacaoSelect.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VeiculoLocacaoSelectActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setText("Veiculo");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(74, 74, 74)
+                .addComponent(VoltarLocacaoBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(LocarButton)
+                .addGap(75, 75, 75))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(DataFim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGap(357, 357, 357)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel2)
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addComponent(jLabel3)
+                                            .addGap(32, 32, 32))))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGap(359, 359, 359)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(LocacaoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(VeiculoLocacaoSelect, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addGap(48, 48, 48)
+                                            .addComponent(jLabel6)))))
+                            .addGap(46, 46, 46))
+                        .addComponent(DataInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(401, 401, 401)
+                        .addComponent(jLabel4))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(405, 405, 405)
+                        .addComponent(jLabel5)))
+                .addContainerGap(350, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(jLabel2)
+                .addGap(37, 37, 37)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(DataInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(DataFim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(LocacaoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(VeiculoLocacaoSelect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(VoltarLocacaoBtn)
+                    .addComponent(LocarButton))
+                .addGap(30, 30, 30))
+        );
+
+        javax.swing.GroupLayout RealizarLocacaoLayout = new javax.swing.GroupLayout(RealizarLocacao);
+        RealizarLocacao.setLayout(RealizarLocacaoLayout);
+        RealizarLocacaoLayout.setHorizontalGroup(
+            RealizarLocacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(RealizarLocacaoLayout.createSequentialGroup()
+                .addGap(82, 82, 82)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        RealizarLocacaoLayout.setVerticalGroup(
+            RealizarLocacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(RealizarLocacaoLayout.createSequentialGroup()
+                .addGap(136, 136, 136)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(126, Short.MAX_VALUE))
+        );
+
+        CardPanel.add(RealizarLocacao, "card2");
+
+        EncerrarLocacao.setBackground(new java.awt.Color(5, 102, 44));
+
+        ListaClientesEncerrar.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel8.setText("Selecione uma locação");
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
+        ListarLocacoesEncerrar.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        Teste.setViewportView(ListarLocacoesEncerrar);
+
+        EncerrarBtn.setText("Encerrar");
+        EncerrarBtn.setBackground(new java.awt.Color(125, 223, 32));
+        EncerrarBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EncerrarBtnActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout ListaClientesEncerrarLayout = new javax.swing.GroupLayout(ListaClientesEncerrar);
+        ListaClientesEncerrar.setLayout(ListaClientesEncerrarLayout);
+        ListaClientesEncerrarLayout.setHorizontalGroup(
+            ListaClientesEncerrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ListaClientesEncerrarLayout.createSequentialGroup()
+                .addGap(140, 140, 140)
+                .addComponent(Teste, javax.swing.GroupLayout.PREFERRED_SIZE, 478, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
+                .addComponent(EncerrarBtn)
+                .addGap(65, 65, 65))
+            .addGroup(ListaClientesEncerrarLayout.createSequentialGroup()
+                .addGap(293, 293, 293)
+                .addComponent(jLabel8)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        ListaClientesEncerrarLayout.setVerticalGroup(
+            ListaClientesEncerrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ListaClientesEncerrarLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel8)
+                .addGroup(ListaClientesEncerrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(ListaClientesEncerrarLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(Teste, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(ListaClientesEncerrarLayout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addComponent(EncerrarBtn)))
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout EncerrarLocacaoLayout = new javax.swing.GroupLayout(EncerrarLocacao);
+        EncerrarLocacao.setLayout(EncerrarLocacaoLayout);
+        EncerrarLocacaoLayout.setHorizontalGroup(
+            EncerrarLocacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(EncerrarLocacaoLayout.createSequentialGroup()
+                .addGap(130, 130, 130)
+                .addComponent(ListaClientesEncerrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        EncerrarLocacaoLayout.setVerticalGroup(
+            EncerrarLocacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(EncerrarLocacaoLayout.createSequentialGroup()
+                .addGap(135, 135, 135)
+                .addComponent(ListaClientesEncerrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(146, Short.MAX_VALUE))
+        );
+
+        CardPanel.add(EncerrarLocacao, "card3");
+
+        ListaLocacoesPanel.setBackground(new java.awt.Color(5, 102, 44));
+
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+
+        TabelaGerenciarClientes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane3.setViewportView(TabelaGerenciarClientes);
+
+        jLabel9.setText("Lista de locações");
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(164, 164, 164)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(321, 321, 321)
+                        .addComponent(jLabel9)))
+                .addGap(44, 195, Short.MAX_VALUE))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout ListaLocacoesPanelLayout = new javax.swing.GroupLayout(ListaLocacoesPanel);
+        ListaLocacoesPanel.setLayout(ListaLocacoesPanelLayout);
+        ListaLocacoesPanelLayout.setHorizontalGroup(
+            ListaLocacoesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ListaLocacoesPanelLayout.createSequentialGroup()
+                .addGap(130, 130, 130)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        ListaLocacoesPanelLayout.setVerticalGroup(
+            ListaLocacoesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ListaLocacoesPanelLayout.createSequentialGroup()
+                .addGap(135, 135, 135)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(117, Short.MAX_VALUE))
+        );
+
+        CardPanel.add(ListaLocacoesPanel, "card4");
+
+        getContentPane().add(CardPanel, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+
+    private void EncerrarLocacaoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EncerrarLocacaoButtonActionPerformed
+        System.out.println();
+        CardPanel.removeAll();
+        CardPanel.add(EncerrarLocacao);
+        CardPanel.repaint();
+        CardPanel.revalidate();
+
+        List<LocacaoEntity> locacoes = locacaoController.index();
+//
+//        // Define o modelo de tabela com as colunas
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("ID");
+        model.addColumn("Data Inicio");
+        model.addColumn("Data Fim");
+        model.addColumn("Valor total");
+        model.addColumn("Cliente");
+        model.addColumn("Veiculo");
+
+        for (LocacaoEntity locacao : locacoes) {
+            model.addRow(new Object[]{locacao.getId(), locacao.getDataInicio(), locacao.getDataFim(), locacao.getValorTotal(), locacao.getCliente().getNome(), locacao.getVeiculo().getModelo()});
+        }
+//        System.out.println(model);
+        ListarLocacoesEncerrar.setModel(model);
+    }//GEN-LAST:event_EncerrarLocacaoButtonActionPerformed
+
+    private void RealizarLocaçãoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RealizarLocaçãoButtonActionPerformed
+        CardPanel.removeAll();
+        CardPanel.add(RealizarLocacao);
+        CardPanel.repaint();
+        CardPanel.validate();
+    }//GEN-LAST:event_RealizarLocaçãoButtonActionPerformed
+
+    private void VisualizarLocacaoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VisualizarLocacaoButtonActionPerformed
+        CardPanel.removeAll();
+        CardPanel.add(ListaLocacoesPanel);
+        CardPanel.repaint();
+        CardPanel.validate();
+
+    }//GEN-LAST:event_VisualizarLocacaoButtonActionPerformed
+
+    private void VoltarLocaçãoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VoltarLocaçãoActionPerformed
+        MainFrame frame = new MainFrame();
+        frame.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_VoltarLocaçãoActionPerformed
+
+    private void VoltarLocacaoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VoltarLocacaoBtnActionPerformed
+        MainFrame frame = new MainFrame();
+        frame.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_VoltarLocacaoBtnActionPerformed
+
+    private void LocarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LocarButtonActionPerformed
+
+        LocacaoController locacaoController = new LocacaoController();
+        VeiculoController veiculoController = new VeiculoController();
+        System.out.println(LocacaoCliente.getSelectedItem());
+        ClienteEntity clienteSelected = clienteController.findByName((String)LocacaoCliente.getSelectedItem());
+
+        VeiculoEntity veiculoSelected = veiculoController.findByModelo((String)VeiculoLocacaoSelect.getSelectedItem());
+
+        LocacaoEntity locacao = new LocacaoEntity();
+        locacao.setDataInicio(DataInicio.getDateTimePermissive());
+        locacao.setDataFim(DataFim.getDateTimePermissive());
+        locacao.setCliente(clienteSelected);
+        locacao.setVeiculo(veiculoSelected);
+        Long diffInDays = DateHelper.diffInDays(DataInicio.getDateTimePermissive(), DataFim.getDateTimePermissive());
+        locacao.setValorTotal(veiculoSelected.getCustoPorDia() * diffInDays);
+
+        ModalLocarVeiculo modal = new ModalLocarVeiculo(this);
+        modal.setVisible(true);
+        if(modal.isConfirmado()){
+             locacaoController.create(locacao);
+        }
+
+//        locacao.setCliente(clienteSelected);
+//        locacao.setVeiculo();
+//        cliente.setNome(NomeCliente.getText());
+//        cliente.setEmail(NomeCliente1.getText());
+//        cliente.setTelefone(NomeCliente2.getText());
+//        System.out.println("Deu" + locadoraSelected);
+//        cliente.setLocadora(locadoraSelected);
+//        clienteController.create(cliente);
+//        JOptionPane.showMessageDialog(this, "Cliente salvo com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_LocarButtonActionPerformed
+//
+//    private void LocacaoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LocacaoClienteActionPerformed
+//        List<LocadoraEntity> locadoras = locadoraController.index();
+//        System.out.println(locadoras.toString());
+//        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
+//
+//        for (LocadoraEntity locadora : locadoras) {
+//            model.addElement(locadora.getNome());
+//        }
+//
+//        // Define o modelo no JComboBox apenas uma vez, fora do loop
+//        LocacaoCliente.setModel(model);
+//    }//GEN-LAST:event_LocacaoClienteActionPerformed
+
+    private void EncerrarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EncerrarBtnActionPerformed
+        int colunaSelected = ListarLocacoesEncerrar.getSelectedRow();
+
+        Object valorColuna = ListarLocacoesEncerrar.getValueAt(colunaSelected,1);
+        Long idLocacao = (long)ListarLocacoesEncerrar.getValueAt(colunaSelected,0);
+        LocacaoEntity locacaoSelected = locacaoController.findById(idLocacao);
+        System.out.println(valorColuna);
+        if(valorColuna != null){
+            ModalEncerrarLocacao modal = new ModalEncerrarLocacao(this);
+            modal.setVisible(true);
+            if(modal.isConfirmado()){
+                locacaoController.delete(locacaoSelected);
+            }
+        }
+    }//GEN-LAST:event_EncerrarBtnActionPerformed
+
+    private void VeiculoLocacaoSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VeiculoLocacaoSelectActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_VeiculoLocacaoSelectActionPerformed
 
     /**
      * @param args the command line arguments
@@ -49,7 +571,7 @@ public class LocacaoFrame extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -78,5 +600,36 @@ public class LocacaoFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel CardPanel;
+    private com.github.lgooddatepicker.components.DateTimePicker DataFim;
+    private com.github.lgooddatepicker.components.DateTimePicker DataInicio;
+    private javax.swing.JButton EncerrarBtn;
+    private javax.swing.JPanel EncerrarLocacao;
+    private javax.swing.JButton EncerrarLocacaoButton;
+    private javax.swing.JPanel ListaClientesEncerrar;
+    private javax.swing.JPanel ListaLocacoesPanel;
+    private javax.swing.JTable ListarLocacoesEncerrar;
+    private javax.swing.JComboBox<String> LocacaoCliente;
+    private javax.swing.JButton LocarButton;
+    private javax.swing.JPanel RealizarLocacao;
+    private javax.swing.JButton RealizarLocaçãoButton;
+    private javax.swing.JTable TabelaGerenciarClientes;
+    private javax.swing.JScrollPane Teste;
+    private javax.swing.JComboBox<String> VeiculoLocacaoSelect;
+    private javax.swing.JButton VisualizarLocacaoButton;
+    private javax.swing.JButton VoltarLocacaoBtn;
+    private javax.swing.JButton VoltarLocação;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JScrollPane jScrollPane3;
     // End of variables declaration//GEN-END:variables
 }

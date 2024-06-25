@@ -3,6 +3,7 @@ package models.entities;
 import jakarta.persistence.*;
 import org.hibernate.annotations.SoftDelete;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -12,8 +13,8 @@ public class LocacaoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
-    public Date dataFim;
-    public Date dataInicio;
+    public LocalDateTime dataFim;
+    public LocalDateTime dataInicio;
     public float valorTotal;
 
     @ManyToOne
@@ -27,7 +28,7 @@ public class LocacaoEntity {
     public LocacaoEntity() {
     }
 
-    public LocacaoEntity(Long id, Date dataFim, Date dataInicio, float valorTotal, VeiculoEntity veiculo, ClienteEntity cliente) {
+    public LocacaoEntity(Long id, LocalDateTime dataFim, LocalDateTime dataInicio, float valorTotal, VeiculoEntity veiculo, ClienteEntity cliente) {
         this.id = id;
         this.dataFim = dataFim;
         this.dataInicio = dataInicio;
@@ -44,19 +45,19 @@ public class LocacaoEntity {
         this.id = id;
     }
 
-    public Date getDataFim() {
+    public LocalDateTime getDataFim() {
         return dataFim;
     }
 
-    public void setDataFim(Date dataFim) {
+    public void setDataFim(LocalDateTime dataFim) {
         this.dataFim = dataFim;
     }
 
-    public Date getDataInicio() {
+    public LocalDateTime getDataInicio() {
         return dataInicio;
     }
 
-    public void setDataInicio(Date dataInicio) {
+    public void setDataInicio(LocalDateTime dataInicio) {
         this.dataInicio = dataInicio;
     }
 

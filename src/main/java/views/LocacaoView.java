@@ -29,12 +29,12 @@ public class LocacaoView {
         System.out.println("=".repeat(header.length()));
         if(locacoes != null){
             for (LocacaoEntity locacao : locacoes) {
-                LocalDate dataInicioFormatada = HandleDates.convertToLocalDateViaInstant(locacao.getDataInicio());
-                LocalDate dataFimFormatada = HandleDates.convertToLocalDateViaInstant(locacao.getDataFim());
+//                LocalDate dataInicioFormatada = HandleDates.convertToLocalDateViaInstant(locacao.getDataInicio());
+//                LocalDate dataFimFormatada = HandleDates.convertToLocalDateViaInstant(locacao.getDataFim());
                 String row = String.format("%-10d %-20s %-30s %-40s %-50s %-60s",
                         locacao.getId(),
-                        dataInicioFormatada,
-                        dataFimFormatada,
+//                        dataInicioFormatada,
+//                        dataFimFormatada,
                         locacao.getValorTotal(),
                         locacao.getVeiculo().getModelo(),
                         locacao.getVeiculo().isDisponivel()
@@ -85,8 +85,8 @@ public class LocacaoView {
 
 
         cliente.setId(clienteId);
-        locacao.setDataInicio(dataInicioParsed);
-        locacao.setDataFim(dataFimParsed);
+//        locacao.setDataInicio(dataInicioParsed);
+//        locacao.setDataFim(dataFimParsed);
         locacao.setValorTotal(custoTotal);
         locacao.setVeiculo(veiculoEscolhido);
         locacao.setCliente(cliente);

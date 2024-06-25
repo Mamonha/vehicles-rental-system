@@ -65,6 +65,10 @@ public class ServiceVeiculo {
         repository.changeStatus(veiculo);
     }
 
+    public VeiculoEntity findByModelo(String modelo){
+        return repository.findByModelo(modelo);
+    }
+
 
 
 }

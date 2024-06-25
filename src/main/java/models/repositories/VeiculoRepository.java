@@ -62,4 +62,10 @@ public class VeiculoRepository implements BasicCrud {
         dao.closeConnection();
     }
 
+    public VeiculoEntity findByModelo(String modelo) {
+        VeiculoEntity veiculo = dao.openConnection().findByModelo(modelo);
+        dao.closeConnection();
+        return veiculo;
+    }
+
 }

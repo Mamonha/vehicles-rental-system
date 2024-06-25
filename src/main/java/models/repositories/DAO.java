@@ -74,4 +74,12 @@ public class DAO <E>{
         em.close();
     }
 
+    public E findByModelo(String modelo) {
+        String jpql = "SELECT e FROM " + classe.getSimpleName() + " e WHERE e.modelo = :modelo";
+        TypedQuery<E> query = em.createQuery(jpql, classe);
+        query.setParameter("modelo", modelo);
+
+        return query.getSingleResult();
+    }
+
 }// Consume newline

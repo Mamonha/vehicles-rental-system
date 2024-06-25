@@ -341,7 +341,7 @@ public class LocadoraFrame extends javax.swing.JFrame {
 
         CardPanel.add(VisualizaLocadora, "card3");
 
-        GerenciarLocadoras.setBackground(new java.awt.Color(255, 51, 51));
+        GerenciarLocadoras.setBackground(new java.awt.Color(5, 102, 44));
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
 

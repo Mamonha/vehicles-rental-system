@@ -85,7 +85,6 @@ public class ClienteFrame extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         ListarClientes = new javax.swing.JTable();
-        EditarCliente = new javax.swing.JPanel();
         RemoveCliente = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -474,22 +473,7 @@ public class ClienteFrame extends javax.swing.JFrame {
 
         CardPanel.add(VisualizaCliente, "card3");
 
-        EditarCliente.setBackground(new java.awt.Color(51, 51, 0));
-
-        javax.swing.GroupLayout EditarClienteLayout = new javax.swing.GroupLayout(EditarCliente);
-        EditarCliente.setLayout(EditarClienteLayout);
-        EditarClienteLayout.setHorizontalGroup(
-            EditarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1321, Short.MAX_VALUE)
-        );
-        EditarClienteLayout.setVerticalGroup(
-            EditarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 689, Short.MAX_VALUE)
-        );
-
-        CardPanel.add(EditarCliente, "card5");
-
-        RemoveCliente.setBackground(new java.awt.Color(255, 51, 51));
+        RemoveCliente.setBackground(new java.awt.Color(5, 102, 44));
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -781,7 +765,6 @@ public class ClienteFrame extends javax.swing.JFrame {
     private javax.swing.JPanel CardPanel;
     private javax.swing.JButton Editar;
     private javax.swing.JButton Editar1;
-    private javax.swing.JPanel EditarCliente;
     private javax.swing.JButton EditarClienteModalBtn;
     private javax.swing.JTable ListarClientes;
     private javax.swing.JComboBox<String> LocadoraCliente;
