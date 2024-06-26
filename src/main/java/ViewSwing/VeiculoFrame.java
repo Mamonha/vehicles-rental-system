@@ -10,6 +10,7 @@ import models.entities.VeiculoEntity;
 import models.entities.LocadoraEntity;
 
 import javax.swing.*;
+import java.util.List;
 
 /**
  *
@@ -549,7 +550,6 @@ public class VeiculoFrame extends javax.swing.JFrame {
 
     private void LocadoraVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LocadoraVeiculoActionPerformed
         List<LocadoraEntity> locadoras = locadoraController.index();
-        System.out.println(locadoras.toString());
         DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
 
         for (LocadoraEntity locadora : locadoras) {
