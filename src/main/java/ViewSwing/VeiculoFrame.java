@@ -68,12 +68,12 @@ public class VeiculoFrame extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        CustoPorDiaField = new javax.swing.JSpinner();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         DisponivelCheckbox = new javax.swing.JCheckBox();
         QuilometragemField = new javax.swing.JTextField();
         jTextField1 = new javax.swing.JTextField();
+        CustoPorDiaField = new javax.swing.JTextField();
         VisualizarVeiculos = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
@@ -227,6 +227,13 @@ public class VeiculoFrame extends javax.swing.JFrame {
             }
         });
 
+        CustoPorDiaField.setBackground(new java.awt.Color(204, 204, 204));
+        CustoPorDiaField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CustoPorDiaFieldActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -260,15 +267,15 @@ public class VeiculoFrame extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jTextField1)
                                 .addGap(85, 85, 85)))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(LocadoraVeiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(LocadoraVeiculo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel11)
                                 .addGap(66, 66, 66))
                             .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(PlacaVeiculoField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(PlacaVeiculoField)
                             .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(CustoPorDiaField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(CustoPorDiaField))
                         .addGap(305, 305, 305))))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(372, 372, 372)
@@ -299,8 +306,8 @@ public class VeiculoFrame extends javax.swing.JFrame {
                             .addComponent(jLabel11))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(CustoPorDiaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(QuilometragemField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(QuilometragemField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(CustoPorDiaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel12)
@@ -551,11 +558,11 @@ public class VeiculoFrame extends javax.swing.JFrame {
 
     private void CadastrarVeiculoCadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastrarVeiculoCadActionPerformed
         LocadoraEntity locadoraSelected = locadoraController.findByName((String)LocadoraVeiculo.getSelectedItem());
-         float custoPorDia = Float.parseFloat(CustoPorDiaField.getName());
-
+        float custoPorDia = Float.parseFloat(CustoPorDiaField.getText());
+        int quilometragem = Integer.parseInt(QuilometragemField.getText());
         veiculo.setModelo(ModeloVeiculoField.getText());
         veiculo.setPlaca(PlacaVeiculoField.getText());
-        veiculo.setQuilometragem(QuilometragemField.getX());
+        veiculo.setQuilometragem(quilometragem);
         veiculo.setLocadora(locadoraSelected);
         veiculo.setDisponivel(DisponivelCheckbox.isSelected());
         veiculo.setCustoPorDia(custoPorDia);
@@ -614,6 +621,10 @@ public class VeiculoFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
+    private void CustoPorDiaFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CustoPorDiaFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CustoPorDiaFieldActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -654,7 +665,7 @@ public class VeiculoFrame extends javax.swing.JFrame {
     private javax.swing.JButton CadastrarVeiculoBtn;
     private javax.swing.JButton CadastrarVeiculoCad;
     private javax.swing.JPanel CardVeiculoPanel;
-    private javax.swing.JSpinner CustoPorDiaField;
+    private javax.swing.JTextField CustoPorDiaField;
     private javax.swing.JCheckBox DisponivelCheckbox;
     private javax.swing.JButton Editar;
     private javax.swing.JButton Editar1;
