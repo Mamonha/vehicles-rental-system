@@ -21,11 +21,22 @@ public class VeiculoFrame extends javax.swing.JFrame {
     protected VeiculoController veiculoController = new VeiculoController();
     protected LocadoraController locadoraController = new LocadoraController();
     protected VeiculoEntity veiculo = new VeiculoEntity();
+    public List<LocadoraEntity> locadoras;
     /**
      * Creates new form VeiculoFrame
      */
     public VeiculoFrame() {
         initComponents();
+        
+          locadoras = locadoraController.index();
+        
+          DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
+
+            for (LocadoraEntity locadora : locadoras) {
+                model.addElement(locadora.getNome());
+            }
+
+            LocadoraVeiculo.setModel(model); 
     }
 
     /**
@@ -56,13 +67,13 @@ public class VeiculoFrame extends javax.swing.JFrame {
         LocadoraVeiculo = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        QuilometragemField = new javax.swing.JSpinner();
         jLabel10 = new javax.swing.JLabel();
         CustoPorDiaField = new javax.swing.JSpinner();
         jLabel11 = new javax.swing.JLabel();
-        AnoField = new javax.swing.JSpinner();
         jLabel12 = new javax.swing.JLabel();
         DisponivelCheckbox = new javax.swing.JCheckBox();
+        QuilometragemField = new javax.swing.JTextField();
+        jTextField1 = new javax.swing.JTextField();
         VisualizarVeiculos = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
@@ -207,6 +218,15 @@ public class VeiculoFrame extends javax.swing.JFrame {
 
         DisponivelCheckbox.setText("Veículo disponível?");
 
+        QuilometragemField.setBackground(new java.awt.Color(204, 204, 204));
+
+        jTextField1.setBackground(new java.awt.Color(204, 204, 204));
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -219,82 +239,79 @@ public class VeiculoFrame extends javax.swing.JFrame {
                 .addGap(80, 80, 80))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(239, 239, 239)
+                .addComponent(jLabel3)
+                .addGap(56, 56, 56)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(DisponivelCheckbox)
+                        .addGap(527, 527, 527))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(LocadoraVeiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(6, 6, 6)
+                                        .addComponent(jLabel4))
+                                    .addComponent(ModeloVeiculoField, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
+                                    .addComponent(jLabel10)
+                                    .addComponent(jLabel12)
+                                    .addComponent(QuilometragemField))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jTextField1)
+                                .addGap(85, 85, 85)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(LocadoraVeiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel4)
-                                        .addGap(104, 104, 104))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(ModeloVeiculoField, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel2)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(jLabel10)
-                                                .addGap(49, 49, 49)
-                                                .addComponent(jLabel12)))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(QuilometragemField, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(AnoField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(12, 12, 12)))
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel7)
-                                    .addComponent(PlacaVeiculoField, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(25, 25, 25)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(CustoPorDiaField, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel11)))))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(DisponivelCheckbox)
-                                .addGap(16, 16, 16)))
-                        .addContainerGap(248, Short.MAX_VALUE))))
+                                .addComponent(jLabel11)
+                                .addGap(66, 66, 66))
+                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(PlacaVeiculoField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(CustoPorDiaField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(305, 305, 305))))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(372, 372, 372)
+                .addComponent(jLabel2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
+                .addGap(22, 22, 22)
                 .addComponent(jLabel2)
-                .addGap(33, 33, 33)
-                .addComponent(jLabel3)
+                .addGap(38, 38, 38)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel7))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(ModeloVeiculoField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(PlacaVeiculoField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(23, 23, 23)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel11))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(CustoPorDiaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(QuilometragemField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel6))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(LocadoraVeiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(34, 34, 34)
+                        .addComponent(DisponivelCheckbox)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ModeloVeiculoField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(PlacaVeiculoField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(jLabel11)
-                    .addComponent(jLabel12))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(QuilometragemField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CustoPorDiaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(AnoField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
-                .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(LocadoraVeiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(DisponivelCheckbox))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton4)
                     .addComponent(CadastrarVeiculoCad))
@@ -308,14 +325,14 @@ public class VeiculoFrame extends javax.swing.JFrame {
             .addGroup(CadVeiculoLayout.createSequentialGroup()
                 .addGap(82, 82, 82)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(116, Short.MAX_VALUE))
         );
         CadVeiculoLayout.setVerticalGroup(
             CadVeiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CadVeiculoLayout.createSequentialGroup()
                 .addGap(136, 136, 136)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(137, Short.MAX_VALUE))
+                .addContainerGap(182, Short.MAX_VALUE))
         );
 
         CardVeiculoPanel.add(CadVeiculo, "card2");
@@ -370,7 +387,7 @@ public class VeiculoFrame extends javax.swing.JFrame {
             .addGroup(VisualizarVeiculosLayout.createSequentialGroup()
                 .addGap(130, 130, 130)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(239, Short.MAX_VALUE))
         );
         VisualizarVeiculosLayout.setVerticalGroup(
             VisualizarVeiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -457,7 +474,7 @@ public class VeiculoFrame extends javax.swing.JFrame {
             .addGroup(GerenciarVeiculosLayout.createSequentialGroup()
                 .addGap(130, 130, 130)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(215, Short.MAX_VALUE))
         );
         GerenciarVeiculosLayout.setVerticalGroup(
             GerenciarVeiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -479,22 +496,22 @@ public class VeiculoFrame extends javax.swing.JFrame {
         CardVeiculoPanel.add(VisualizarVeiculos);
         CardVeiculoPanel.repaint();
         CardVeiculoPanel.revalidate();
-
-        List<ClienteEntity> clientes = clienteController.index();
-
-        // Define o modelo de tabela com as colunas
-        DefaultTableModel model = new DefaultTableModel();
-        model.addColumn("ID");
-        model.addColumn("Nome");
-        model.addColumn("Telefone");
-        model.addColumn("Email");
-        model.addColumn("Locadora");
-
-        for (ClienteEntity cliente : clientes) {
-            model.addRow(new Object[]{cliente.getId(), cliente.getNome(), cliente.getTelefone(), cliente.getEmail(), cliente.getLocadora().getNome()});
-        }
-        System.out.println(model);
-        ListarClientes.setModel(model);
+//
+//        List<ClienteEntity> clientes = clienteController.index();;
+//
+//        // Define o modelo de tabela com as colunas
+//        DefaultTableModel model = new DefaultTableModel();
+//        model.addColumn("ID");
+//        model.addColumn("Nome");
+//        model.addColumn("Telefone");
+//        model.addColumn("Email");
+//        model.addColumn("Locadora");
+//
+//        for (ClienteEntity cliente : clientes) {
+//            model.addRow(new Object[]{cliente.getId(), cliente.getNome(), cliente.getTelefone(), cliente.getEmail(), cliente.getLocadora().getNome()});
+//        }
+//        System.out.println(model);
+//        ListarClientes.setModel(model);
     }//GEN-LAST:event_VisualizarVeiculosBtnActionPerformed
 
     private void CadastrarVeiculoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastrarVeiculoBtnActionPerformed
@@ -510,7 +527,6 @@ public class VeiculoFrame extends javax.swing.JFrame {
         CardVeiculoPanel.repaint();
         CardVeiculoPanel.validate();
 
-        updateClienteTable();
     }//GEN-LAST:event_GerenciarVeiculosBtnActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
@@ -535,13 +551,14 @@ public class VeiculoFrame extends javax.swing.JFrame {
 
     private void CadastrarVeiculoCadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastrarVeiculoCadActionPerformed
         LocadoraEntity locadoraSelected = locadoraController.findByName((String)LocadoraVeiculo.getSelectedItem());
+         float custoPorDia = Float.parseFloat(CustoPorDiaField.getName());
 
         veiculo.setModelo(ModeloVeiculoField.getText());
         veiculo.setPlaca(PlacaVeiculoField.getText());
         veiculo.setQuilometragem(QuilometragemField.getX());
         veiculo.setLocadora(locadoraSelected);
         veiculo.setDisponivel(DisponivelCheckbox.isSelected());
-        veiculo.setCustoPorDia((float)CustoPorDiaField.getValue());
+        veiculo.setCustoPorDia(custoPorDia);
 
         veiculo.setLocadora(locadoraSelected);
         veiculoController.create(veiculo);
@@ -567,8 +584,8 @@ public class VeiculoFrame extends javax.swing.JFrame {
         Long idCliente = (long)TabelaGerenciarClientes.getValueAt(colunaSelected,0);
         System.out.println(valorColuna);
         if(valorColuna != null){
-            ModalEditarCliente modal = new ModalEditarCliente(this, idCliente, this);
-            modal.setVisible(true);
+//            ModalEditarCliente modal = new ModalEditarCliente(this, idCliente, this);
+//            modal.setVisible(true);
         }
     }//GEN-LAST:event_EditarActionPerformed
 
@@ -582,7 +599,7 @@ public class VeiculoFrame extends javax.swing.JFrame {
             ModalRemoverCliente modalRemover = new ModalRemoverCliente(this);
             modalRemover.setVisible(true);
             if(modalRemover.isConfirmado()){
-                clienteController.delete(clienteController.findById(idCliente));
+//                clienteController.delete(clienteController.findById(idCliente));
                 JOptionPane.showMessageDialog(this, "Usuário deletado com sucesso!");
                 modalRemover.setVisible(false);
                 repaint();
@@ -592,6 +609,10 @@ public class VeiculoFrame extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_Editar1ActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -629,7 +650,6 @@ public class VeiculoFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JSpinner AnoField;
     private javax.swing.JPanel CadVeiculo;
     private javax.swing.JButton CadastrarVeiculoBtn;
     private javax.swing.JButton CadastrarVeiculoCad;
@@ -644,7 +664,7 @@ public class VeiculoFrame extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> LocadoraVeiculo;
     private javax.swing.JTextField ModeloVeiculoField;
     private javax.swing.JTextField PlacaVeiculoField;
-    private javax.swing.JSpinner QuilometragemField;
+    private javax.swing.JTextField QuilometragemField;
     private javax.swing.JTable TabelaGerenciarClientes;
     private javax.swing.JPanel VisualizarVeiculos;
     private javax.swing.JButton VisualizarVeiculosBtn;
@@ -667,5 +687,6 @@ public class VeiculoFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }
