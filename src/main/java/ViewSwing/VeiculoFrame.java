@@ -5,6 +5,7 @@
 package ViewSwing;
 
 import ViewSwing.modal.ModalEditarVeiculo;
+import ViewSwing.modal.ModalRemoverVeiculo;
 import controllers.LocadoraController;
 import controllers.VeiculoController;
 import models.entities.VeiculoEntity;
@@ -633,14 +634,14 @@ public class VeiculoFrame extends javax.swing.JFrame {
         int colunaSelected = TabelaGerenciarVeiculo.getSelectedRow();
 
         Object valorColuna = TabelaGerenciarVeiculo.getValueAt(colunaSelected,1);
-        Long idCliente = (long)TabelaGerenciarVeiculo.getValueAt(colunaSelected,0);
+        Long idVeiculo = (long)TabelaGerenciarVeiculo.getValueAt(colunaSelected,0);
 
         if(valorColuna != null){
-            ModalRemoverCliente modalRemover = new ModalRemoverCliente(this);
+            ModalRemoverVeiculo modalRemover = new ModalRemoverVeiculo(this);
             modalRemover.setVisible(true);
             if(modalRemover.isConfirmado()){
-//                clienteController.delete(clienteController.findById(idCliente));
-                JOptionPane.showMessageDialog(this, "Usuário deletado com sucesso!");
+                veiculoController.delete(veiculoController.findById(idVeiculo));
+                JOptionPane.showMessageDialog(this, "Veiculo deletado com sucesso!");
                 modalRemover.setVisible(false);
                 repaint();
             }else{
