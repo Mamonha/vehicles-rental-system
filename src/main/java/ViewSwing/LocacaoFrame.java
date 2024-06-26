@@ -90,7 +90,7 @@ public class LocacaoFrame extends javax.swing.JFrame {
         ListaLocacoesPanel = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        TabelaGerenciarClientes = new javax.swing.JTable();
+        TabelaListarLocacoes = new javax.swing.JTable();
         jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -380,7 +380,7 @@ public class LocacaoFrame extends javax.swing.JFrame {
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
 
-        TabelaGerenciarClientes.setModel(new javax.swing.table.DefaultTableModel(
+        TabelaListarLocacoes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -391,7 +391,7 @@ public class LocacaoFrame extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane3.setViewportView(TabelaGerenciarClientes);
+        jScrollPane3.setViewportView(TabelaListarLocacoes);
 
         jLabel9.setText("Lista de locações");
         jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -482,7 +482,23 @@ public class LocacaoFrame extends javax.swing.JFrame {
         CardPanel.add(ListaLocacoesPanel);
         CardPanel.repaint();
         CardPanel.validate();
+        
+        List<LocacaoEntity> locacoes = locacaoController.index();
+//
+//        // Define o modelo de tabela com as colunas
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("ID");
+        model.addColumn("Data Inicio");
+        model.addColumn("Data Fim");
+        model.addColumn("Valor total");
+        model.addColumn("Cliente");
+        model.addColumn("Veiculo");
 
+        for (LocacaoEntity locacao : locacoes) {
+            model.addRow(new Object[]{locacao.getId(), locacao.getDataInicio(), locacao.getDataFim(), locacao.getValorTotal(), locacao.getCliente().getNome(), locacao.getVeiculo().getModelo()});
+        }
+//        System.out.println(model);
+        TabelaListarLocacoes.setModel(model);
     }//GEN-LAST:event_VisualizarLocacaoButtonActionPerformed
 
     private void VoltarLocaçãoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VoltarLocaçãoActionPerformed
@@ -613,7 +629,7 @@ public class LocacaoFrame extends javax.swing.JFrame {
     private javax.swing.JButton LocarButton;
     private javax.swing.JPanel RealizarLocacao;
     private javax.swing.JButton RealizarLocaçãoButton;
-    private javax.swing.JTable TabelaGerenciarClientes;
+    private javax.swing.JTable TabelaListarLocacoes;
     private javax.swing.JScrollPane Teste;
     private javax.swing.JComboBox<String> VeiculoLocacaoSelect;
     private javax.swing.JButton VisualizarLocacaoButton;
