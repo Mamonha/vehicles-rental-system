@@ -10,6 +10,7 @@ import models.entities.VeiculoEntity;
 import models.entities.LocadoraEntity;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.util.List;
 
 /**
@@ -504,21 +505,22 @@ public class VeiculoFrame extends javax.swing.JFrame {
         CardVeiculoPanel.repaint();
         CardVeiculoPanel.revalidate();
 //
-//        List<ClienteEntity> clientes = clienteController.index();;
-//
-//        // Define o modelo de tabela com as colunas
-//        DefaultTableModel model = new DefaultTableModel();
-//        model.addColumn("ID");
-//        model.addColumn("Nome");
-//        model.addColumn("Telefone");
-//        model.addColumn("Email");
-//        model.addColumn("Locadora");
-//
-//        for (ClienteEntity cliente : clientes) {
-//            model.addRow(new Object[]{cliente.getId(), cliente.getNome(), cliente.getTelefone(), cliente.getEmail(), cliente.getLocadora().getNome()});
-//        }
-//        System.out.println(model);
-//        ListarClientes.setModel(model);
+        List<VeiculoEntity> veiculos = veiculoController.index();;
+
+        // Define o modelo de tabela com as colunas
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("ID");
+        model.addColumn("Modelo");
+        model.addColumn("Placa");
+        model.addColumn("Quilometragem");
+        model.addColumn("Disponivel");
+        model.addColumn("Custo");
+        model.addColumn("Locadora");
+        for (VeiculoEntity veiculo : veiculos) {
+            model.addRow(new Object[]{veiculo.getId(), veiculo.getModelo(), veiculo.getPlaca(), veiculo.getQuilometragem(), veiculo.isDisponivel(), veiculo.getCustoPorDia(), veiculo.getLocadora().getNome()});
+        }
+        System.out.println(model);
+        ListarClientes.setModel(model);
     }//GEN-LAST:event_VisualizarVeiculosBtnActionPerformed
 
     private void CadastrarVeiculoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastrarVeiculoBtnActionPerformed
