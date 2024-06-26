@@ -4,6 +4,7 @@
  */
 package ViewSwing;
 
+import ViewSwing.modal.ModalEditarVeiculo;
 import controllers.LocadoraController;
 import controllers.VeiculoController;
 import models.entities.VeiculoEntity;
@@ -83,7 +84,7 @@ public class VeiculoFrame extends javax.swing.JFrame {
         GerenciarVeiculos = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        TabelaGerenciarClientes = new javax.swing.JTable();
+        TabelaGerenciarVeiculo = new javax.swing.JTable();
         jLabel9 = new javax.swing.JLabel();
         Editar = new javax.swing.JButton();
         Editar1 = new javax.swing.JButton();
@@ -411,7 +412,7 @@ public class VeiculoFrame extends javax.swing.JFrame {
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
 
-        TabelaGerenciarClientes.setModel(new javax.swing.table.DefaultTableModel(
+        TabelaGerenciarVeiculo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -422,7 +423,7 @@ public class VeiculoFrame extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane3.setViewportView(TabelaGerenciarClientes);
+        jScrollPane3.setViewportView(TabelaGerenciarVeiculo);
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel9.setText("Gerenciar Veículos");
@@ -542,6 +543,28 @@ public class VeiculoFrame extends javax.swing.JFrame {
         CardVeiculoPanel.repaint();
         CardVeiculoPanel.validate();
 
+        List<VeiculoEntity> veiculos = veiculoController.index();;
+
+        // Define o modelo de tabela com as colunas
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("ID");
+        model.addColumn("Modelo");
+        model.addColumn("Placa");
+        model.addColumn("Quilometragem");
+        model.addColumn("Disponivel");
+        model.addColumn("Custo Dia R$");
+        String disponivel = "";
+
+        for (VeiculoEntity veiculo : veiculos) {
+            if(veiculo.isDisponivel()){
+                disponivel = "Sim";
+            }else{
+                disponivel = "Não";
+            }
+            model.addRow(new Object[]{veiculo.getId(), veiculo.getModelo(), veiculo.getPlaca(), veiculo.getQuilometragem(), disponivel, veiculo.getCustoPorDia()});
+        }
+
+        TabelaGerenciarVeiculo.setModel(model);
     }//GEN-LAST:event_GerenciarVeiculosBtnActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
@@ -595,22 +618,22 @@ public class VeiculoFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_LocadoraVeiculoActionPerformed
 
     private void EditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditarActionPerformed
-        int colunaSelected = TabelaGerenciarClientes.getSelectedRow();
+        int colunaSelected = TabelaGerenciarVeiculo.getSelectedRow();
 
-        Object valorColuna = TabelaGerenciarClientes.getValueAt(colunaSelected,1);
-        Long idCliente = (long)TabelaGerenciarClientes.getValueAt(colunaSelected,0);
+        Object valorColuna = TabelaGerenciarVeiculo.getValueAt(colunaSelected,1);
+        Long idCliente = (long)TabelaGerenciarVeiculo.getValueAt(colunaSelected,0);
         System.out.println(valorColuna);
         if(valorColuna != null){
-//            ModalEditarCliente modal = new ModalEditarCliente(this, idCliente, this);
-//            modal.setVisible(true);
+            ModalEditarVeiculo modal = new ModalEditarVeiculo(this, idCliente);
+            modal.setVisible(true);
         }
     }//GEN-LAST:event_EditarActionPerformed
 
     private void Editar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Editar1ActionPerformed
-        int colunaSelected = TabelaGerenciarClientes.getSelectedRow();
+        int colunaSelected = TabelaGerenciarVeiculo.getSelectedRow();
 
-        Object valorColuna = TabelaGerenciarClientes.getValueAt(colunaSelected,1);
-        Long idCliente = (long)TabelaGerenciarClientes.getValueAt(colunaSelected,0);
+        Object valorColuna = TabelaGerenciarVeiculo.getValueAt(colunaSelected,1);
+        Long idCliente = (long)TabelaGerenciarVeiculo.getValueAt(colunaSelected,0);
 
         if(valorColuna != null){
             ModalRemoverCliente modalRemover = new ModalRemoverCliente(this);
@@ -687,7 +710,7 @@ public class VeiculoFrame extends javax.swing.JFrame {
     private javax.swing.JTextField ModeloVeiculoField;
     private javax.swing.JTextField PlacaVeiculoField;
     private javax.swing.JTextField QuilometragemField;
-    private javax.swing.JTable TabelaGerenciarClientes;
+    private javax.swing.JTable TabelaGerenciarVeiculo;
     private javax.swing.JPanel VisualizarVeiculos;
     private javax.swing.JButton VisualizarVeiculosBtn;
     private javax.swing.JButton jButton4;
