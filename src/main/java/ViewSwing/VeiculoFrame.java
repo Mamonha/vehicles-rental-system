@@ -79,7 +79,7 @@ public class VeiculoFrame extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        ListarClientes = new javax.swing.JTable();
+        ListarVeiculos = new javax.swing.JTable();
         GerenciarVeiculos = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -350,9 +350,9 @@ public class VeiculoFrame extends javax.swing.JFrame {
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel8.setText("Lista de Clientes");
+        jLabel8.setText("Lista de Veículos");
 
-        ListarClientes.setModel(new javax.swing.table.DefaultTableModel(
+        ListarVeiculos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -363,7 +363,7 @@ public class VeiculoFrame extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane4.setViewportView(ListarClientes);
+        jScrollPane4.setViewportView(ListarVeiculos);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -395,7 +395,7 @@ public class VeiculoFrame extends javax.swing.JFrame {
             .addGroup(VisualizarVeiculosLayout.createSequentialGroup()
                 .addGap(130, 130, 130)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(239, Short.MAX_VALUE))
+                .addContainerGap(235, Short.MAX_VALUE))
         );
         VisualizarVeiculosLayout.setVerticalGroup(
             VisualizarVeiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -514,13 +514,19 @@ public class VeiculoFrame extends javax.swing.JFrame {
         model.addColumn("Placa");
         model.addColumn("Quilometragem");
         model.addColumn("Disponivel");
-        model.addColumn("Custo");
-        model.addColumn("Locadora");
+        model.addColumn("Custo Dia R$");
+        String disponivel = "";
+
         for (VeiculoEntity veiculo : veiculos) {
-            model.addRow(new Object[]{veiculo.getId(), veiculo.getModelo(), veiculo.getPlaca(), veiculo.getQuilometragem(), veiculo.isDisponivel(), veiculo.getCustoPorDia(), veiculo.getLocadora().getNome()});
+            if(veiculo.isDisponivel()){
+                disponivel = "Sim";
+            }else{
+                disponivel = "Não";
+            }
+            model.addRow(new Object[]{veiculo.getId(), veiculo.getModelo(), veiculo.getPlaca(), veiculo.getQuilometragem(), disponivel, veiculo.getCustoPorDia()});
         }
         System.out.println(model);
-        ListarClientes.setModel(model);
+        ListarVeiculos.setModel(model);
     }//GEN-LAST:event_VisualizarVeiculosBtnActionPerformed
 
     private void CadastrarVeiculoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastrarVeiculoBtnActionPerformed
@@ -676,7 +682,7 @@ public class VeiculoFrame extends javax.swing.JFrame {
     private javax.swing.JButton Editar1;
     private javax.swing.JPanel GerenciarVeiculos;
     private javax.swing.JButton GerenciarVeiculosBtn;
-    private javax.swing.JTable ListarClientes;
+    private javax.swing.JTable ListarVeiculos;
     private javax.swing.JComboBox<String> LocadoraVeiculo;
     private javax.swing.JTextField ModeloVeiculoField;
     private javax.swing.JTextField PlacaVeiculoField;
