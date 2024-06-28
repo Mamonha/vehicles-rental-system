@@ -1,5 +1,14 @@
 package ViewSwing;
 
+import com.mysql.cj.xdevapi.Client;
+import controllers.ClienteController;
+import controllers.LocacaoController;
+import controllers.LocadoraController;
+import controllers.VeiculoController;
+import models.entities.ClienteEntity;
+import models.entities.LocacaoEntity;
+import models.entities.LocadoraEntity;
+import models.entities.VeiculoEntity;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -9,6 +18,9 @@ import org.jfree.data.general.DefaultPieDataset;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class MainFrame extends javax.swing.JFrame {
 
@@ -92,34 +104,61 @@ public class MainFrame extends javax.swing.JFrame {
                                 .addGap(30, 30, 30))
         );
 
-        // Creating datasets for each chart
         DefaultCategoryDataset locacoesDataset = new DefaultCategoryDataset();
-        locacoesDataset.addValue(5, "Locações", "Jan");
-        locacoesDataset.addValue(7, "Locações", "Feb");
-        locacoesDataset.addValue(6, "Locações", "Mar");
+        LocadoraController locadoraController = new LocadoraController();
+
+        List<LocadoraEntity> locadoras = locadoraController.index();
+
+        for (LocadoraEntity locadora: locadoras){
+            locacoesDataset.addValue(5, "Locações", locadora.getNome());
+            locacoesDataset.addValue(7, "Locações", locadora.getNome());
+            locacoesDataset.addValue(6, "Locações", locadora.getNome());
+        }
 
         DefaultCategoryDataset clientesDataset = new DefaultCategoryDataset();
-        clientesDataset.addValue(4, "Clientes", "Jan");
-        clientesDataset.addValue(6, "Clientes", "Feb");
-        clientesDataset.addValue(8, "Clientes", "Mar");
+
+        ClienteController clienteController = new ClienteController();
+        List<ClienteEntity> clientes = clienteController.index();
+
+        Map<LocadoraEntity, Integer> clientesPorLocadora = new HashMap<>();
+
+        for (ClienteEntity cliente : clientes) {
+            LocadoraEntity locadora = cliente.getLocadora();
+            clientesPorLocadora.put(locadora, clientesPorLocadora.getOrDefault(locadora, 0) + 1);
+        }
+
+        for (Map.Entry<LocadoraEntity, Integer> entry : clientesPorLocadora.entrySet()) {
+            LocadoraEntity locadora = entry.getKey();
+            Integer quantidadeClientes = entry.getValue();
+            clientesDataset.addValue(quantidadeClientes, "Clientes", locadora.getNome());
+        }
 
         DefaultPieDataset vehiclesDataset = new DefaultPieDataset();
-        vehiclesDataset.setValue("Carros", 50);
-        vehiclesDataset.setValue("Motos", 20);
-        vehiclesDataset.setValue("Caminhões", 30);
+
+        VeiculoController veiculoController = new VeiculoController();
+        List<VeiculoEntity> veiculos = veiculoController.index();
+
+        if(!veiculos.isEmpty()){
+            for (VeiculoEntity veiculo: veiculos){
+                vehiclesDataset.setValue(veiculo.getModelo(), 50);
+                vehiclesDataset.setValue(veiculo.getModelo(), 20);
+                vehiclesDataset.setValue(veiculo.getModelo(), 30);
+            }
+        }else {
+            vehiclesDataset.setValue("Nenhum", 30);
+        }
 
         DefaultCategoryDataset areaDataset = new DefaultCategoryDataset();
         areaDataset.addValue(1, "Locações Cumulativas", "Jan");
         areaDataset.addValue(3, "Locações Cumulativas", "Feb");
         areaDataset.addValue(6, "Locações Cumulativas", "Mar");
 
-        // Creating the charts
-        JFreeChart locacoesChart = ChartFactory.createBarChart("Quantidade de Locações por Mês", "Mês", "Quantidade", locacoesDataset, PlotOrientation.VERTICAL, true, true, false);
-        JFreeChart clientesChart = ChartFactory.createLineChart("Quantidade de Clientes por Mês", "Mês", "Quantidade", clientesDataset, PlotOrientation.VERTICAL, true, true, false);
-        JFreeChart vehiclesChart = ChartFactory.createPieChart("Distribuição de Veículos", vehiclesDataset, true, true, false);
-        JFreeChart areaChart = ChartFactory.createAreaChart("Evolução Cumulativa de Locações", "Mês", "Quantidade", areaDataset, PlotOrientation.VERTICAL, true, true, false);
 
-        // Creating chart panels
+        JFreeChart locacoesChart = ChartFactory.createBarChart("Quantidade de Locações por Locadora", "Mês", "Quantidade", locacoesDataset, PlotOrientation.VERTICAL, true, true, false);
+        JFreeChart clientesChart = ChartFactory.createLineChart("Quantidade de Clientes por Locadora", "Mês", "Quantidade", clientesDataset, PlotOrientation.VERTICAL, true, true, false);
+        JFreeChart vehiclesChart = ChartFactory.createPieChart("Distribuição de Veículos", vehiclesDataset, true, true, false);
+        JFreeChart areaChart = ChartFactory.createAreaChart("Evolução Cumulativa de Locações", "Locadora", "Quantidade", areaDataset, PlotOrientation.VERTICAL, true, true, false);
+
         ChartPanel locacoesChartPanel = new ChartPanel(locacoesChart);
         locacoesChartPanel.setPreferredSize(new java.awt.Dimension(280, 200));
 
@@ -132,7 +171,6 @@ public class MainFrame extends javax.swing.JFrame {
         ChartPanel areaChartPanel = new ChartPanel(areaChart);
         areaChartPanel.setPreferredSize(new java.awt.Dimension(280, 200));
 
-        // Creating a panel to hold all charts
         JPanel chartsPanel = new JPanel();
         chartsPanel.setLayout(new GridLayout(2, 2));
         chartsPanel.add(locacoesChartPanel);
@@ -140,7 +178,6 @@ public class MainFrame extends javax.swing.JFrame {
         chartsPanel.add(vehiclesChartPanel);
         chartsPanel.add(areaChartPanel);
 
-        // Adding side panel and charts panel to main panel
         jPanel4.add(jPanel3, BorderLayout.WEST);
         jPanel4.add(chartsPanel, BorderLayout.CENTER);
 

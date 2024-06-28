@@ -545,8 +545,6 @@ public class VeiculoFrame extends javax.swing.JFrame {
         CardVeiculoPanel.validate();
 
         List<VeiculoEntity> veiculos = veiculoController.index();;
-
-        // Define o modelo de tabela com as colunas
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("ID");
         model.addColumn("Modelo");
@@ -613,8 +611,6 @@ public class VeiculoFrame extends javax.swing.JFrame {
         for (LocadoraEntity locadora : locadoras) {
             model.addElement(locadora.getNome());
         }
-
-        // Define o modelo no JComboBox apenas uma vez, fora do loop
         LocadoraVeiculo.setModel(model);
     }//GEN-LAST:event_LocadoraVeiculoActionPerformed
 
